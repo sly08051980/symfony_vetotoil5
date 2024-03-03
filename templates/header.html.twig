@@ -1,0 +1,92 @@
+<div class="pb-5">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="navbar">
+        <div class="container-fluid">
+            <div class="d-flex align-items-center">
+                <img src="{{ asset('img/logo.png') }}" alt="logo-vetotoil" height="30px" width="30px" class="me-3">
+                <a class="navbar-brand" href="#">VETOTOIL</a>
+            </div>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarScroll">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 mx-auto">
+                    {% if not app.user %}
+                       
+                            <li class="nav-item">
+                                <a href="{{ path('app_home') }}" class="nav-link">Accueil</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">Connexion</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ path('app_register_patient') }}" class="nav-link">Inscription</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">Contact</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a href="#" class="nav-link active" aria-current="page">Accueil</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">RDV</a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="?controller=rdv&action=voir_rdv">Voir mes rdv</a></li>
+                                    <li><a class="dropdown-item" href="?controller=rdv&action=recherche_rdv&profession=Toiletteur">Rechercher Toiletteur</a></li>
+                                    <li><a class="dropdown-item" href="?controller=rdv&action=recherche_rdv&profession=Vétérinaire">Rechercher Vétérinaire</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Animal</a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="?controller=animal&action=ajouter_animal">Ajouter un animal</a></li>
+                                    <li><a class="dropdown-item" href="?controller=animal&action=afficher_animal">Afficher un animal</a></li>
+                                    <li><a class="dropdown-item" href="#">Suivi traitement</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Mon Profil</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="?controller=home&action=contact">Contact</a>
+                            </li>
+                    
+                    {% endif %}
+                </ul>
+
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        {% if app.user %}
+                            {% set userRoles = app.user.getRoles() %}
+                            {% if 'ROLE_ADMIN' in userRoles or 'ROLE_SOCIETE' in userRoles or 'ROLE_PATIENT' in userRoles or 'ROLE_EMPLOYER' in userRoles %}
+                                <li class="nav-item">
+                                    <a class="nav-link active">Bonjour
+                                        {# {{ app.user.getNomPatient() }}
+                                        {% if app.user.getPrenomPatient() is not empty %}
+                                            {{ app.user.getPrenomPatient() }}
+                                        {% endif %} #}
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    {# <a href="{{ path('app_logout') }}"><img src="{{ asset('img/deconnexion1.png') }}" class="img-fluid" alt="vetotoil connexion"></a> #}
+                                </li>
+                            {% else %}
+                                <li class="nav-item">
+                                    {# <a href="{{ path('app_login') }}"><img src="{{ asset('img/connexion1.png') }}" class="img-fluid" alt="vetotoil connexion"></a> #}
+                                </li>
+                            {% endif %}
+                        {% else %}
+                            <li class="nav-item">
+                                {# <a href="{{ path('app_login') }}"><img src="{{ asset('img/connexion1.png') }}" class="img-fluid" alt="vetotoil connexion"></a> #}
+                            </li>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>

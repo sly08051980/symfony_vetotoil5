@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+<div class="container pb-5 pt-5" id="inscription">
+
+
+		<div class="row pb-5 ">
+			<div class="card custom-box-shadow">
+				<div class="col-12 justify-content-center py-5">
+					<h1 class="text-center">Inscription Societe</h1>
+				</div>
+			</div>
+		</div>
+    
+
+    {{ form_errors(registrationSocieteForm) }}
+<div class="card custom-box-shadow">
+			<div class="row justify-content-center">
+
+				<div class="col-lg-6">
+    {{ form_start(registrationSocieteForm) }}
+        {{ form_row(registrationSocieteForm.email) }}
+        {{ form_row(registrationSocieteForm.plainPassword, {
+            label: 'Password'
+        }) }}
+        {{ form_row(registrationSocieteForm.agreeTerms) }}
+
+        <button type="submit" class="btn">Register</button>
+    {{ form_end(registrationSocieteForm) }}
+    </div>
+    </div>
+    </div>
+    </div>
+{% endblock %}
